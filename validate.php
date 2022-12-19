@@ -41,9 +41,6 @@ $registres -> bind_param("s", $username);
 
 $ok = $registres ->execute();
 
-// echo $registres ->execute();
-
-// $result = $conn->query
 
 if($ok === true){
     
