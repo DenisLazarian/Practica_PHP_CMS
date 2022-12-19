@@ -70,14 +70,11 @@ if($ok === true){
         
 
     }
-
-
 }
     
 $registres -> close();
 $connUser -> close();
 header("location:loginPage.php");
-
 
 ?>
 
