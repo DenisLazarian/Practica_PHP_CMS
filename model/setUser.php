@@ -19,12 +19,9 @@ if(isset($_POST['registro'])){
     $mail=$_POST['email'];
     $age=$_POST['age'];
 
-
-    $conexion = new mysqli("localhost", "root", "", "cms_bd"); 
-
+    $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
 
 
-            
     $stmt = $conexion -> prepare("INSERT INTO users (nick, nomcognom, contraseña, mail, edat) VALUES (?,?,?,?,?)"); // inserta registres a bases de dades
     $stmt ->bind_param("ssssi", $user,$fullName, $contraseña, $mail, $edad);
 
@@ -34,7 +31,7 @@ if(isset($_POST['registro'])){
     $edad=$age;
 
     $stmt -> execute();
-    
+
         
     $stmt -> close();
     $conexion ->close();

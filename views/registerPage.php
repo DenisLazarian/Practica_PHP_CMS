@@ -1,4 +1,8 @@
+<?php 
 
+defined("MVC_CMS") or die("Permision denied");
+
+?>
 
 
 
@@ -76,6 +80,5 @@
 
 </div>
 
-    
 </body>
 </html>

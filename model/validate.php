@@ -21,7 +21,7 @@ if(empty($username) && empty($password) ){
 }
 
 
-$connUser = new mysqli("localhost","root", "", "cms_bd");
+$connUser = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 $connUser->set_charset("utf8");
 
 

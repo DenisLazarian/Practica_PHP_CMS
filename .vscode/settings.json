@@ -1,0 +1,5 @@
+{
+    "scm.defaultViewSortKey": "path",
+    "scm.repositories.sortOrder": "discovery time",
+    "editor.suggest.localityBonus": true
+}
