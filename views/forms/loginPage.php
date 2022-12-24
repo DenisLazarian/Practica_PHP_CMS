@@ -69,11 +69,11 @@
 
 </head>
 <body class="bg-info"> -->
-    <div class=" d-flex justify-content-center align-items-center   p-md-5    ">
+    <div class=" d-flex justify-content-center align-items-center   p-md-5   bg-info ">
         <form class="bg bg-white p-5 " style="width: 29rem;" action="validate.php" method="post" >
         
             <div class="text-center">
-                <img class=" border border-dark rounded-circle p-1 border-5" style="height: 7rem;" src="img/user-solid.svg" alt="icono inicio sesion de usuario">
+                <img class=" border border-dark rounded-circle p-1 border-5" style="height: 7rem;" src="views/img/user-solid.svg" alt="icono inicio sesion de usuario">
     
             </div>
             <h1 class="text-center mt-2 mb-4">LOGIN</h1>
@@ -83,7 +83,7 @@
             
             <div class="d-flex input-group ">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="img/user-solid.svg" alt="icono logueo de usuario">
+                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono logueo de usuario">
                 </div>
                 <input class="form-control" type="text" name="username" id="user" placeholder="Username">
 
@@ -91,7 +91,7 @@
 
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="img/lock-solid.svg" alt="icono de contraseña ">
+                    <img class="" style="height: 20px;" src="views/img/lock-solid.svg" alt="icono de contraseña ">
                 </div>
                 <input class="form-control" type="password" name="password" id="pass" placeholder="Password">
 
@@ -108,7 +108,7 @@
             <input class="fw-semibold btn btn-info w-100 text-light mt-4" name="enviar" type="submit" value="Login">
             <div class="text-center mt-1">
                 <span class="text-secondary">Don't have an account?</span>
-                <a href="registerPage.html" class="text-decoration-none fw-semibold">Register</a>
+                <a href="index.php?action=register" class="text-decoration-none fw-semibold">Register</a>
             </div>
 
             <div class="p-3">
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <a href="#" class="btn btn-white d-flex gap-2 justify-content-center border-secondary mt-3    ">
-                <img src="img/2991148.png" alt="google icon" style="height: 1.6rem;">
+                <img src="views/img/2991148.png" alt="google icon" style="height: 1.6rem;">
                 <span>Continue whith Google</span>
             </a>
             

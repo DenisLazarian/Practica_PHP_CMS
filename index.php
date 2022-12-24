@@ -3,7 +3,11 @@
 define("MVC_CMS", "app");
 
 if(isset($_GET['action']) && $_GET['action']=="login"){
-    require "";
+    require "controller/ctl_forms.php";
+    render_login_form();
+}elseif(isset($_GET['action']) && $_GET['action']=="register") {
+    require "controller/ctl_forms.php";
+    render_register_form();
 }else{
     require "controller/ctl_main.php";
     inicio();
