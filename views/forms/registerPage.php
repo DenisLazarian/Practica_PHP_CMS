@@ -18,7 +18,7 @@
 </head>
 <body class="bg-info">
     <div class=" d-flex justify-content-center align-items-center   p-md-5  p-sm-0   container ">
-        <form class="bg bg-white p-5 " style="width: 40rem;" action="#" method="post" >
+        <form class="bg bg-white p-5 " style="width: 40rem;" action="model/setUser.php" method="post" >
         
             <h2 class="mb-5">Create account</h2>
             
@@ -51,7 +51,14 @@
 
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/envelope-solid.svg" alt="icono de contraseña ">
+                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de usuario ">
+                </div>
+                <input class="form-control" type="text" name="nickname" id="nick" placeholder="New nick name">
+
+            </div>
+            <div class="d-flex input-group mt-3">
+                <div class="input-group-text bg-info">
+                    <img class="" style="height: 20px;" src="views/img/envelope-solid.svg" alt="icono de email ">
                 </div>
                 <input class="form-control" type="email" name="email" id="mail" placeholder="Email address or username">
 
@@ -59,15 +66,10 @@
 
             <div class="d-flex input-group mt-3 mb-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/phone-solid.svg" alt="icono de contraseña ">
+                    <img class="" style="height: 20px;" src="views/img/check-to-slot-solid.svg" alt="icono de contraseña ">
                 </div>
-                <select class=" border-left-0 border font-weight-bold text-muted"  name="countryNumbers" id="selectNumb">
-                    <option value="es">+34</option>
-                    <option value="deu">+49</option>
-                    <option value="and">+376</option>
-                    <option value="ro">+40</option>
-                </select>
-                <input class="form-control" type="number" name="email" id="mail" placeholder="Phone number">
+                
+                <input class="form-control" type="number" name="age" id="age" placeholder="Enter your age">
 
             </div>
 
@@ -80,7 +82,7 @@
                         <div class="input-group-text bg-info">
                             <img class="" style="height: 20px;" src="views/img/lock-solid.svg" alt="icono de contraseña">
                         </div>
-                        <input class="form-control" type="text" name="firstName" id="name" placeholder="Password">
+                        <input class="form-control" type="password" name="pass" id="pass" placeholder="Password">
                     </div>
                     
                 </div>
@@ -90,14 +92,14 @@
                         <div class="input-group-text bg-info img-user-custom">
                             <img class="" style="height: 20px;" src="views/img/lock-solid.svg" alt="icono de contraseña">
                         </div>
-                        <input class="form-control lastName-class" type="text" name="firstName" id="name" placeholder="Confirm your password">
+                        <input class="form-control lastName-class" type="password" name="confirmPass" id="confirmPass" placeholder="Confirm your password">
                     </div>
                 </div>
 
             </div>
             
 
-            <input class="fw-semibold btn btn-info w-100 text-light mt-4" type="submit" value="Create your account">
+            <input name="register" class="fw-semibold btn btn-info w-100 text-light mt-4" type="submit" value="Create your account">
             
 
             <div class="p-3">

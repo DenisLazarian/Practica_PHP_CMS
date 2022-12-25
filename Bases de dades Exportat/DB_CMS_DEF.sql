@@ -39,9 +39,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `edat` int(3) NOT NULL DEFAULT 0,
   `nivell` varchar(10) NOT NULL DEFAULT '0' COMMENT 'Nivel de permisos',
   PRIMARY KEY (`nick`),
-  UNIQUE KEY `nick` (`nick`),
-  UNIQUE KEY `nomcognom` (`nomcognom`),
-  UNIQUE KEY `contraseña` (`contraseña`)
+  UNIQUE KEY `nick` (`nick`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 CHECKSUM=1 COMMENT='Tabla que contiene los usuarios del cms.';
 
 -- Volcando datos para la tabla cms_bd.users: ~0 rows (aproximadamente)

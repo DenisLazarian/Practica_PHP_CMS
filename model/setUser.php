@@ -1,45 +1,64 @@
 <?php 
 
-$username="";
-$pass ="";
-$name="";
-$mail="";
-$age="";
 
 
-if(empty($username) && empty($pass) ){
-    header("location: registerPage.php");
-}
-
-if(isset($_POST['registro'])){
-
-    $username=$_POST['username'];
-    $pass =$_POST['pass'];
-    $name=$_POST['name'];
-    $mail=$_POST['email'];
-    $age=$_POST['age'];
-
-    $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
+// function setUserInBD(){
+require "../config/db.php";
 
 
-    $stmt = $conexion -> prepare("INSERT INTO users (nick, nomcognom, contraseña, mail, edat) VALUES (?,?,?,?,?)"); // inserta registres a bases de dades
-    $stmt ->bind_param("ssssi", $user,$fullName, $contraseña, $mail, $edad);
+    $username="";
+    $pass ="";
+    $name="";
+    $mail="";
+    $age="";
 
-    $user = $username;
-    $contraseña = password_hash($pass, PASSWORD_DEFAULT);
-    $fullName=$name;
-    $edad=$age;
+    
+    
+    if(isset($_POST['register'])){
+    
+        $name=$_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $username=$_POST['nickname'];
+        $mail=$_POST['email'];
+        $age=$_POST['age'];
+        $pass =$_POST['pass'];
+        $confirmPass = $_POST['confirmPass'];
 
-    $stmt -> execute();
 
+        if(empty($username) && empty($pass) ){
+            header("location: ../index.php?action=register");
+        }
+    
+        $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
+    
+    
+        $stmt = $conexion -> prepare("INSERT INTO users (nick, nomcognom, contraseña, mail, edat) VALUES (?,?,?,?,?)"); // inserta registres a bases de dades
+        $stmt ->bind_param("ssssi", $user,$fullName, $contraseña, $mail, $edad);
         
-    $stmt -> close();
-    $conexion ->close();
+        $user = $username;
+        $contraseña = password_hash($confirmPass, PASSWORD_DEFAULT);
+        $fullName=$name. " ".$lastName;
+        $edad=$age;
+        $stmt -> execute();
+    
+        
+        
+        $stmt -> close();
+        $conexion ->close();
 
+        // header("location: ../index.php");
+    
+        
+    }else{
+        echo "algo paso, no se pulsó el boton";
+        // header("location: ../index.php?action=register");
+    }
 
-}else{
-    header("location: registerPage.php");
-}
+    // header("location: ../index.php");
+// }
+
+// setUserInBD();
+
 
 
 
