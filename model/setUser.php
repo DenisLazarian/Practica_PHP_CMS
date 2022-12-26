@@ -46,12 +46,12 @@ require "../config/db.php";
         $stmt -> close();
         $conexion ->close();
 
-        // header("location: ../index.php");
+        header("location: ../index.php");
     
         
     }else{
         echo "algo paso, no se pulsó el boton";
-        // header("location: ../index.php?action=register");
+        header("location: ../index.php?action=register");
     }
 
     // header("location: ../index.php");

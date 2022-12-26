@@ -14,11 +14,16 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
     // include "model/setUser.php";
     // setUserInBD();
 
-    
 
 
 
-}else{
+
+}elseif (isset($_GET['action'])&& $_GET['action']=="close") {
+    require "controller/ctl_log_out.php";
+    destroy_session();
+}
+
+else{
     require "controller/ctl_main.php";
     inicio();
 }

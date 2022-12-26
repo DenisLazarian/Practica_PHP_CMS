@@ -6,8 +6,14 @@
                     <div class="row">
                         <div class="copy_right col-sm-12 ">
                             <p class="text-center text-light "> Copyright © 2000 -
-                                <script
-                                    type="text/javascript">var year = new Date(); document.write(year.getFullYear());</script>
+                                <!-- <script
+                                    type="text/javascript">var year = new Date(); document.write(year.getFullYear());</script> -->
+
+                                    <?php 
+                                        $anyActual = getdate();
+                                        print $anyActual['year'];
+                                    ?>
+                                    
                                 , <a class="text-decoration-none " href="#">Lazarian S.L.</a> All rights reserved.
                             </p>
                         </div>

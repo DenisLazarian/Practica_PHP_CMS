@@ -1,6 +1,7 @@
 <?php 
 defined("MVC_CMS") or die('Permission denied');
 session_start();
+
 ?>
 
 

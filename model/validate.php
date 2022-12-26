@@ -57,7 +57,7 @@ if($ok === true){
         if( password_verify($password,$passo)){ // validar si conincideix el hash de la bd amb la contraseña.
 
             
-            // los datos de bases de datos del usuario logueado se guardan en variables session
+            // les dades de bases de dades del usuari logats es guarden en variables de sessió
             $_SESSION["logueado"]=true;     
             $_SESSION["usuario"] = $userName;
             $_SESSION['nombre-completo'] =$fullName;
