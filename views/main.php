@@ -1,6 +1,6 @@
 <?php 
 defined("MVC_CMS") or die('Permission denied');
-
+session_start();
 ?>
 
 
@@ -14,12 +14,12 @@ defined("MVC_CMS") or die('Permission denied');
     <title>Document</title>
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<body class="bg-secondary">
+<body class="">
 
 <?php require "plantillas/_navBar.php" ?>
 
 
-
+main
 
 
 

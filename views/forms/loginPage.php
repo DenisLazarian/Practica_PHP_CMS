@@ -70,7 +70,7 @@
 </head>
 <body class="bg-info"> -->
     <div class=" d-flex justify-content-center align-items-center   p-md-5   bg-info ">
-        <form class="bg bg-white p-5 " style="width: 29rem;" action="validate.php" method="post" >
+        <form class="bg bg-white p-5 " style="width: 29rem;" action="model/validate.php" method="post" >
         
             <div class="text-center">
                 <img class=" border border-dark rounded-circle p-1 border-5" style="height: 7rem;" src="views/img/user-solid.svg" alt="icono inicio sesion de usuario">

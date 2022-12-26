@@ -12,4 +12,6 @@ function render_register_form(){
 }
 
 
+
+
 ?>
