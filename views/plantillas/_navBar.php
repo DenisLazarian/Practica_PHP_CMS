@@ -113,7 +113,7 @@
                     <li>
                     <?php 
                         if($_SESSION['logueado']){
-                            echo '<a href="index.php?action=login" class="dropdown-item">Change password</a>';
+                            echo '<a href="index.php?action=change-pass" class="dropdown-item">Change password</a>';
                         }else{
                             echo '<a href="index.php?action=register" class="dropdown-item">Register</a>';
                         }

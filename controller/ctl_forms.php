@@ -11,6 +11,9 @@ function render_register_form(){
     include "views/forms/registerPage.php";
 }
 
+function render_change_pass_form(){
+    include "views/forms/changePass.php";
+}
 
 
 

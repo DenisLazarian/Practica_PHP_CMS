@@ -18,7 +18,13 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
 
 
 
-}elseif (isset($_GET['action'])&& $_GET['action']=="close") {
+}elseif (isset($_GET['action']) && $_GET['action']=="change-pass") {
+    
+    require "controller/ctl_forms.php";
+    render_change_pass_form();
+}
+
+elseif (isset($_GET['action'])&& $_GET['action']=="close") {
     require "controller/ctl_log_out.php";
     destroy_session();
 }
