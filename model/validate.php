@@ -65,6 +65,9 @@ if($ok === true){
             $_SESSION['edad'] =$age;
             $_SESSION["level-role"] = $level;
             
+
+            $_SESSION['not-correct-pass']=false;
+            $_SESSION['not-equal-error'] = false;
             $registres -> close();
             $connUser -> close();
             header("location: ../index.php");
