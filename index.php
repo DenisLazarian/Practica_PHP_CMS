@@ -2,6 +2,7 @@
 
 define("MVC_CMS", "app");
 
+
 if(isset($_GET['action']) && $_GET['action']=="login"){
     require "controller/ctl_forms.php";
     render_login_form();
@@ -22,6 +23,15 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
     
     require "controller/ctl_forms.php";
     render_change_pass_form();
+}elseif (isset($_GET['action']) && $_GET['action']=="priv-space") {
+    require "controller/ctl_main.php";
+    privado();
+}elseif (isset($_GET['action']) && $_GET['action']=="user-list") {
+    require "controller/ctl_main.php";
+    listarUsuarios();
+}elseif (isset($_GET['action']) && $_GET['action']=="user-edit"){
+    require "controller/ctl_forms.php";
+    user_update_form();
 }
 
 elseif (isset($_GET['action'])&& $_GET['action']=="close") {
@@ -30,8 +40,10 @@ elseif (isset($_GET['action'])&& $_GET['action']=="close") {
 }
 
 else{
+
     require "controller/ctl_main.php";
     inicio();
+
 }
 
 

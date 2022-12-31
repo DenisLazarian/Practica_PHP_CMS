@@ -70,7 +70,7 @@ if($ok === true){
             $_SESSION['not-equal-error'] = false;
             $registres -> close();
             $connUser -> close();
-            header("location: ../index.php");
+            header("location: ../index.php?action=priv-space");
         }else{
             
             $registres -> close();

@@ -16,5 +16,9 @@ function render_change_pass_form(){
 }
 
 
+function user_update_form(){
+    include "views/plantillas_crud/users/edit.php";
+}
+
 
 ?>

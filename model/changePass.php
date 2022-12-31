@@ -63,7 +63,7 @@ if(isset($_POST['enviar'])){
                     
                     $regUpdate-> close();
                     $connUser -> close();
-                    header("location: ../index.php");
+                    header("location: ../index.php?action=priv-space");
                 }else{
 
                     $_SESSION['not-correct-pass']=true;
