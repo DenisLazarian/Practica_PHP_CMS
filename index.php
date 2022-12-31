@@ -32,7 +32,17 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
 }elseif (isset($_GET['action']) && $_GET['action']=="user-edit"){
     require "controller/ctl_forms.php";
     user_update_form();
+
+
+
+}elseif (isset($_GET['action']) && $_GET['action']=="user-delete"){
+    require "controller/ctl_delete.php";
+    render_delete_user();
+    
 }
+
+
+
 
 elseif (isset($_GET['action'])&& $_GET['action']=="close") {
     require "controller/ctl_log_out.php";

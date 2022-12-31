@@ -18,7 +18,7 @@ if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false){
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-left">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.php?action=priv-space">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
@@ -106,7 +106,6 @@ if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false){
                     <li><hr class="dropdown-divider"></li>
                     
                     <li>
-                    <a href="index.php?action=close" class="dropdown-item">Log out</a>
                         <!-- <?php 
                         if($_SESSION['logueado']){
                             echo '<a href="index.php?action=close" class="dropdown-item">Log out</a>';
@@ -116,10 +115,11 @@ if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false){
                         ?> -->
                         
                             
+                        <a href="index.php?action=change-pass" class="dropdown-item">Change password</a>
                     </li>
-
+                    
                     <li>
-                    <a href="index.php?action=change-pass" class="dropdown-item">Change password</a>
+                        <a href="index.php?action=close" class="dropdown-item">Log out</a>
                     <!-- <?php 
                         if($_SESSION['logueado']){
                             echo '<a href="index.php?action=change-pass" class="dropdown-item">Change password</a>';

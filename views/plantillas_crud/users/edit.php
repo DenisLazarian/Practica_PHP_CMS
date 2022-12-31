@@ -1,33 +1,13 @@
 <?php 
 session_start();
 
-if(!isset($_SESSION['logueado'])&& $_SESSION['level-role']<10){
-    die("Acceso denegado, no dispone de permisos para acceder aqui");
-}
 
-include "config/db.php";
-$id = $_GET['id'];
-$connexion  = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-$connexion->set_charset("utf8");
-$select = "SELECT * from users where nick = '".$id."'";
+include "model/crudFunctions.php";
 
-if ($connexion->connect_error) {
-    die("Connection failed: " . $connexion->connect_error);
-}
-
-$result = $connexion -> query($select);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    $user = $result->fetch_assoc();
-        
-    
-} else {
-header("location: index.php?action=user-list");
-}
-$connexion->close();
-
+$user = selected_user();
 // echo $user['contraseña'];
+
+
 
 ?>
 
@@ -46,25 +26,15 @@ $connexion->close();
 
 
 <div class=" d-flex justify-content-center align-items-center   p-md-5   ">
-        <form class="bg bg-white p-5  " style="width: 29rem;" action="views/plantillas_crud/users/update.php" method="post" >
+        <form class="bg bg-white p-5  " style="width: 29rem;" action="views/plantillas_crud/users/update.php?id=<?=$_GET['id']; ?>" method="post" >
         
             
             <div>
-                <!-- <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono logueo de usuario">
-                </div>
-                <input class="form-control" type="text" name="username" id="user" value="hello" disabled> -->
+               
                 Modificació de dades de l'usuari  &#32;<b style="maring-left:5px"> <?=$user['nick']; ?></b>.
             </div>
 
-            <!-- <div class="d-flex input-group mt-3">
-                <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de usuario">
-                </div>
-                <input disabled="disabled" class="form-control" type="text" name="new-user-nick" id="nick-user" value="<?=$user['nick']; ?>">
-
-
-            </div> -->
+            
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
                     <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de usuario">

@@ -33,7 +33,6 @@
             <th>Age</th>
             <th>Level</th>
             <th></th>
-            <th></th>
         </tr>
 
     </thead>
@@ -67,8 +66,7 @@
             </td>
             <td><?php echo $row['nivell'] ?>
             </td>
-            <td><a href="index.php?action=user-edit&id=<?php echo $row['nick'] ?>" class="modify btn btn-warning">Modify</a></td>
-            <td><a href="index.php?action=user-delete" class="modify btn btn-danger">Delete</a></td>
+            <td><a href="index.php?action=user-edit&id=<?php echo $row['nick'] ?>" class="modify btn btn-warning">Modify</a>&#32;<a href="index.php?action=user-delete&id=<?php echo $row['nick'] ?>" class="modify btn btn-danger">Delete</a></td>
         </tr>
 
        <?php 
