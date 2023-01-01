@@ -10,7 +10,7 @@ function destroy_session(){
     // $_SESSION['email'] =null;
     // $_SESSION['edad'] =null;
     // $_SESSION["level-role"] = null;
-    // session_destroy();
+    session_destroy();
     header("location: index.php");
 
     

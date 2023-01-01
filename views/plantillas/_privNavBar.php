@@ -2,8 +2,9 @@
 
 <?php 
 
+
 if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false){
-    die("Permiso denegado, debe iniciar session para acceder aqui.");
+    die("Permiso denegado!!! Debe iniciar session para acceder aqui. Inicia sessión <a href='index.php?action=login'>Aqui</a>.");
 }
 
 ?>

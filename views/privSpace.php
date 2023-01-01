@@ -1,5 +1,7 @@
 <?php 
 defined("MVC_CMS") or die('Permission denied');
+
+define("PRIV_PAGE", "administration");
 session_start();
 
 ?>

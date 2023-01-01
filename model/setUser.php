@@ -1,6 +1,6 @@
 <?php 
 
-
+// defined("MVC_CMS") or die('Permission denied');
 
 // function setUserInBD(){
 require "../config/db.php";
@@ -14,7 +14,7 @@ require "../config/db.php";
 
     
     
-    if(isset($_POST['register'])){
+    if(isset($_POST['register'])){ // només fincione per l'usuari que es vol registrar
     
         $name=$_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -50,22 +50,11 @@ require "../config/db.php";
     
         
     }else{
-        echo "algo paso, no se pulsó el boton";
+        
         header("location: ../index.php?action=register");
     }
 
-    // header("location: ../index.php");
-// }
 
-// setUserInBD();
-
-
-
-
-
-
-
-// echo "username: ". $username. " - pass: ". $pass; 
 
 
 ?>

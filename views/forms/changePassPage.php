@@ -1,5 +1,7 @@
 
 <?php 
+// defined("MVC_CMS") or die('Permission denied');
+
 session_start();
 if(!$_SESSION['logueado']) // Per si entra amb URL
     die("Acceso denegado!! Necessitas loguearte primero antes de acceder aqui.");

@@ -1,5 +1,7 @@
 
 <?php 
+// defined("MVC_CMS") or die('Permission denied');
+
 require "../config/db.php";
 session_start();
 

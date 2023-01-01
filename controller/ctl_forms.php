@@ -20,6 +20,10 @@ function user_update_form(){
     include "views/plantillas_crud/users/edit.php";
 }
 
+function user_create_form(){
+    include "views/plantillas_crud/users/create.php";
+}
+
 
 
 

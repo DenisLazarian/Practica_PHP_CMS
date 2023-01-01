@@ -20,24 +20,41 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
 
 
 }elseif (isset($_GET['action']) && $_GET['action']=="change-pass") {
-    
     require "controller/ctl_forms.php";
     render_change_pass_form();
+
 }elseif (isset($_GET['action']) && $_GET['action']=="priv-space") {
+    
     require "controller/ctl_main.php";
     privado();
+    
+
 }elseif (isset($_GET['action']) && $_GET['action']=="user-list") {
-    require "controller/ctl_main.php";
-    listarUsuarios();
+    // session_start();
+
+        require "controller/ctl_main.php";
+        listarUsuarios();
+    
+        // die("Permiso denegado!! no dispone de permiso para esta accion.");
+    
 }elseif (isset($_GET['action']) && $_GET['action']=="user-edit"){
-    require "controller/ctl_forms.php";
-    user_update_form();
-
-
+        require "controller/ctl_forms.php";
+        user_update_form();
 
 }elseif (isset($_GET['action']) && $_GET['action']=="user-delete"){
-    require "controller/ctl_delete.php";
-    render_delete_user();
+        session_start(); 
+        if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false ){
+            die("Permiso denegado!!! Debe iniciar session para acceder aqui.");
+        }elseif( $_SESSION["logueado"] ==10){
+            die("Permiso denegado!!! no dispone de permisos para esta accion.");
+        }
+        require "controller/ctl_delete.php";
+        render_delete_user();
+
+}
+elseif (isset($_GET['action']) && $_GET['action']=="user-create"){
+    require "controller/ctl_forms.php";
+    user_create_form();
     
 }
 

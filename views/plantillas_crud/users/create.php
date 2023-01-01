@@ -1,21 +1,11 @@
 <?php 
-// error_reporting(E_ERROR);
-
-defined("MVC_CMS") or die('Permission denied');
 session_start();
 
+// include "model/crudFunctions.php";
+// error_reporting(E_ERROR);
 if(!($_SESSION["level-role"] == 10 && $_SESSION["logueado"]==true) ){
     die("Permiso denegado!! no dispone de permiso para esta accion.");
 }
-
-
-
-
-include "model/crudFunctions.php";
-
-$user = selected_user();
-// echo $user['contraseña'];
-
 
 
 ?>
@@ -35,62 +25,58 @@ $user = selected_user();
 
 
 <div class=" d-flex justify-content-center align-items-center   p-md-5   ">
-        <form class="bg bg-white p-5  " style="width: 29rem;" action="views/plantillas_crud/users/update.php?id=<?=$_GET['id']; ?>" method="post" >
+        <form class="bg bg-white p-5  " style="width: 29rem;" action="index.php?action=user-create" method="post" >
         
             
             <div>
-               
-                Modificació de dades de l'usuari  &#32;<b style="maring-left:5px"> <?=$user['nick']; ?></b>.
+                Bienvenido &#32;<b> <?=$_SESSION['usuario']; ?></b>. Aqui puede crear un usuario de forma manual:
             </div>
-
             
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
                     <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de usuario">
                 </div>
-                <input  class="form-control" type="text" name="new-full-name" id="name-user" value="<?=$user['nomcognom']; ?>">
+                <input  class="form-control" type="text" name="new-full-name" id="name-user" placeholder="Full name">
 
+            </div>
+            <div class="d-flex input-group mt-3">
+                <div class="input-group-text bg-info">
+                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de nick de usuario">
+                </div>
+                <input  class="form-control" type="text" name="new-nick-name" id="name-user" placeholder="Nickname">
 
             </div>
 
-            
-            
-
-            
             
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
                     <img class="" style="height: 20px;" src="views/img/check-to-slot-solid.svg" alt="icono de edad ">
                 </div>
-                <input class="form-control" type="text" name="new-age" id="age" value="<?=$user['edat']; ?>">
-
+                <input class="form-control" type="text" name="new-age" id="age" placeholder="Age">
             </div>
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
                     <img class="" style="height: 20px;" src="views/img/envelope-solid.svg" alt="icono de correo ">
                 </div>
-                <input class="form-control" type="text" name="new-mail" id="mail" value="<?=$user['mail']; ?>">
+                <input class="form-control" type="text" name="new-mail" id="mail" placeholder ="Email">
 
             </div>
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
                     <img class="" style="height: 20px;" src="views/img/lock-solid.svg" alt="icono de contraseña ">
                 </div>
-                <input class="form-control" type="password" name="password" id="pass" placeholder="Password">
+                <input class="form-control" type="password" name="new-password" id="pass" placeholder="Password">
             </div>
 
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
                     <img class="" style="height: 20px;" src="views/img/triangle-exclamation-solid.svg" alt="icono de restriccion o permisos">
                 </div>
-                <input class="form-control" type="number" name="level-role" id="level" value="<?=$user['nivell']; ?>">
+                <input class="form-control" type="number" name="new-level-role" id="level" placeholder = "Level role">
             </div>
             
         
-            
-        
-
-            <input class="fw-semibold btn btn-info w-100 text-light mt-4" name="modificar" type="submit" value="Modify">
+            <input class="fw-semibold btn btn-info w-100 text-light mt-4" name="crear" type="submit" value="Create user">
             <a href="index.php?action=user-list" class="text-decoration-none">Return to the administration area.</a>
             
             
@@ -98,6 +84,12 @@ $user = selected_user();
 
     </div>
 
+    <?php 
+    include "model/crudFunctions.php";
+
+    insertUserByAdminAction();
+
+    ?>
     
     
 

@@ -1,13 +1,11 @@
 
 <?php 
+
 session_start();
 
 require "../config/db.php";
 
 
-// print $_POST['oldPass'];
-// print $_POST['newPass'];
-// print $_POST['confirmNewPass'];
 
 
 if(isset($_POST['enviar'])){

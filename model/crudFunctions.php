@@ -1,6 +1,5 @@
 <?php 
 
-
 // Funció que modifica les dades de l'usuari seleccionat per la funció "selected_user()".
 function update_user(){
     include "../../../config/db.php";
@@ -95,6 +94,43 @@ function deleteUser(){
     header("location: index.php?action=user-list");
 
     
+}
+
+
+function insertUserByAdminAction(){
+    require "config/db.php";
+
+    if(isset($_POST['crear'])){ // només fincione per l'usuari que es vol registrar
+    
+
+
+        if(empty($_POST['new-password']) ){
+            header("location: index.php?action=user-create");
+        }
+    
+        $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
+    
+    
+        $stmt = $conexion -> prepare("INSERT INTO users (nick, nomcognom, contraseña, mail, edat, nivell) VALUES (?,?,?,?,?,?)"); // inserta registres a bases de dades
+        $stmt ->bind_param("ssssii",
+            $_POST['new-nick-name'],
+            $_POST['new-full-name'],
+            password_hash($_POST['new-password'], PASSWORD_DEFAULT),
+            $_POST['new-mail'],
+            $_POST['new-age'],
+            $_POST['new-level-role']
+        );
+        
+        
+        $stmt -> execute();
+    
+        $stmt -> close();
+        $conexion ->close();
+
+        header("location: index.php?action=user-list");
+    
+        
+    }
 }
 
 

@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php 
+defined("MVC_CMS") or die('Permission denied');
+
+// defined("PRIV_PAGE") or die('Permission denied!! no pasa por list-area');
+session_start(); 
+
+if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION["logueado"]==true) ){
+    die("Permiso denegado!! no dispone de permiso para esta accion.");
+}
+
+?>
 
 
 <!DOCTYPE html>
@@ -22,7 +32,7 @@
 
 <h3 class="mb-5">Users management</h3>
 
-<a class="btn btn-success" href="#"><div class="glyphicon glyphicon-plus-sign"></div>New User</a>
+<a class="btn btn-success" href="index.php?action=user-create"><div class="glyphicon glyphicon-plus-sign"></div>New user</a>
 <a href="index.php?action=priv-space" class="btn btn-primary"><div class="glyphicon glyphicon-plus-sign"></div>Home</a>
 <table class="table mt-5 table-striped table-hover table-light">
     <thead>
@@ -66,7 +76,17 @@
             </td>
             <td><?php echo $row['nivell'] ?>
             </td>
-            <td><a href="index.php?action=user-edit&id=<?php echo $row['nick'] ?>" class="modify btn btn-warning">Modify</a>&#32;<a href="index.php?action=user-delete&id=<?php echo $row['nick'] ?>" class="modify btn btn-danger">Delete</a></td>
+            <td><a href="index.php?action=user-edit&id=<?php echo $row['nick'] ?>" class="modify btn btn-warning">Modify</a>&#32;
+
+            <?php if($row['nick'] != $_SESSION["usuario"]){ ?>
+            
+            <a href="index.php?action=user-delete&id=<?php echo $row['nick'] ?>" class="modify btn btn-danger">Delete</a>
+
+            <?php 
+
+            } ?>
+                
+            </td>
         </tr>
 
        <?php 
