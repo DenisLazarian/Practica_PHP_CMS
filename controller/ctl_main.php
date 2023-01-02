@@ -13,4 +13,7 @@ function privado(){
 function listarUsuarios(){
     include 'views/plantillas_crud/users/list.php';
 }
+function listarNoticias(){
+    include 'views/plantillas_crud/news/list.php';
+}
 ?>

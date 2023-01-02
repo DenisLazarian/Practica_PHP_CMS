@@ -25,6 +25,18 @@ function user_create_form(){
 }
 
 
+function news_create_form(){
+    include "views/plantillas_crud/news/create.php";
+
+}
+
+function news_update_form(){
+    include "views/plantillas_crud/news/edit.php";
+}
+
+
+
+
 
 
 ?>

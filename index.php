@@ -45,7 +45,7 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
         session_start(); 
         if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false ){
             die("Permiso denegado!!! Debe iniciar session para acceder aqui.");
-        }elseif( $_SESSION["logueado"] ==10){
+        }elseif( $_SESSION["level-role"] ==10){
             die("Permiso denegado!!! no dispone de permisos para esta accion.");
         }
         require "controller/ctl_delete.php";
@@ -56,8 +56,29 @@ elseif (isset($_GET['action']) && $_GET['action']=="user-create"){
     require "controller/ctl_forms.php";
     user_create_form();
     
+}elseif(isset($_GET['action']) && $_GET['action']=="news-list"){
+    require "controller/ctl_main.php";
+    listarNoticias();
 }
-
+elseif(isset($_GET['action']) && $_GET['action']=="new-edit"){
+    require "controller/ctl_forms.php";
+    news_update_form();
+}
+elseif(isset($_GET['action']) && $_GET['action']=="new-create"){
+    require "controller/ctl_forms.php";
+    news_create_form();
+}
+elseif (isset($_GET['action']) && $_GET['action']=="new-delete") {
+    session_start(); 
+        if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false ){
+            die("Permiso denegado!!! Debe iniciar session para acceder aqui.");
+        }elseif( $_SESSION["level-role"] !=10 || $_SESSION["level-role"] < 5  ){
+            // echo  $_SESSION["level-role"];
+            die("Permiso denegado!!! no dispone de permisos para esta accion.");
+        }
+        require "controller/ctl_delete.php";
+        render_delete_reportage();
+}
 
 
 

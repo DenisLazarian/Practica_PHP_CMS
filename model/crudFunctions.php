@@ -6,14 +6,15 @@ function update_user(){
 
     $connect = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-    $stmt = $connect -> prepare("UPDATE users SET nomcognom = ?, contraseña = ?, mail = ?, edat = ?, nivell = ? where nick = '".$_GET['id']."'"); // inserta registres a bases de dades
+    $stmt = $connect -> prepare("UPDATE users SET nomcognom = ?, contraseña = ?, mail = ?, edat = ?, nivell = ? where nick = ?"); // inserta registres a bases de dades
     $stmt ->bind_param(
-        "sssii", 
+        "sssiis", 
         $_POST['new-full-name'], 
         password_hash($_POST['password'], PASSWORD_DEFAULT), 
         $_POST['new-mail'], 
         $_POST['new-age'], 
-        $_POST['level-role']
+        $_POST['level-role'],
+        $_GET['id']
     );
     
     
@@ -23,6 +24,30 @@ function update_user(){
     $connect ->close();
 
     header("location: ../../../index.php?action=user-list");
+
+}
+
+function update_reportage(){
+    include "../../../config/db.php";
+
+    $connect = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+
+    $stmt = $connect -> prepare("UPDATE noticias SET titulo = ?, fecha = ?, descripcio = ?  where codin =?"); // inserta registres a bases de dades
+    $stmt ->bind_param(
+        "sssi", 
+        $_POST['new-title'], 
+        $_POST['new-date'], 
+        $_POST['new-description'], 
+        $_GET['id']
+    );
+    
+    
+    $stmt -> execute();
+
+    $stmt -> close();
+    $connect ->close();
+
+    header("location: ../../../index.php?action=news-list");
 
 }
 
@@ -36,7 +61,7 @@ function selected_user(){
     }
 
     $id = $_GET['id'];
-    extract($_GET);
+    // extract($_GET);
     $connexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
     $connexion->set_charset("utf8");
 
@@ -58,6 +83,43 @@ function selected_user(){
         $user = $result->fetch_assoc();
     } else {
         header("location: index.php?action=user-list");
+    }
+
+    // Cerrar la declaración y la conexión a la base de datos
+    $stmt->close();
+    $connexion->close();
+
+    return $user;
+}
+function selected_reportage(){
+    include "config/db.php";
+    if(!isset($_SESSION['logueado'])&& $_SESSION['level-role']<10){
+        die("Acceso denegado, no dispone de permisos para acceder aqui");
+    }
+
+    $id = $_GET['id'];
+    // extract($_GET);
+    $connexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+    $connexion->set_charset("utf8");
+
+    // Crear la consulta preparada
+    $select = "SELECT * from noticias where codin = ?";
+    $stmt = $connexion->prepare($select);
+
+    // Vincular variables de PHP a los parámetros de la consulta
+
+    $stmt->bind_param("s", $id);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Procesar el resultado
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        // output data of each row
+        $user = $result->fetch_assoc();
+    } else {
+        header("location: index.php?action=news-list");
     }
 
     // Cerrar la declaración y la conexión a la base de datos
@@ -95,6 +157,32 @@ function deleteUser(){
 
     
 }
+function deleteReportage(){
+    session_start();
+    include "config/db.php";
+
+    if(!isset($_SESSION['logueado'])&& $_SESSION['level-role']<10){
+        die("Acceso denegado, no dispone de permisos para acceder aqui");
+    }
+
+
+
+    $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+
+    $delete = "DELETE from noticias where codin = ?";
+
+    $stmt = $conexion -> prepare($delete);
+    $stmt -> bind_param("s", $_GET['id']);
+
+    $stmt -> execute();
+
+    $stmt -> close();
+    $conexion -> close();
+
+    header("location: index.php?action=news-list");
+
+    
+}
 
 
 function insertUserByAdminAction(){
@@ -128,6 +216,37 @@ function insertUserByAdminAction(){
         $conexion ->close();
 
         header("location: index.php?action=user-list");
+    
+        
+    }
+}
+
+
+
+function insertNewByAdminOrReporterAction(){
+    require "config/db.php";
+
+    if(isset($_POST['crear-new'])){ // només fincione per l'usuari que es vol registrar
+    
+
+        $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
+        
+        // echo $_POST['new-date'];
+    
+        $stmt = $conexion -> prepare("INSERT INTO noticias ( titulo, fecha, descripcio) VALUES (?,?,?)"); // inserta registres a bases de dades
+        $stmt ->bind_param("sds",
+            $_POST['new-title'],
+            $_POST['new-date'],
+            $_POST['new-description']
+        );
+        
+        
+        $stmt -> execute();
+    
+        $stmt -> close();
+        $conexion ->close();
+
+        // header("location: index.php?action=news-list");
     
         
     }

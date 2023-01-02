@@ -58,7 +58,7 @@ if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false){
                     ?>
                         
     
-                    <li><a href="index.php?action=news" class="nav-link text-dark">Manage news</a></li>
+                    <li><a href="index.php?action=news-list" class="nav-link text-dark">Manage news</a></li>
                 </ul>
             </div>
 

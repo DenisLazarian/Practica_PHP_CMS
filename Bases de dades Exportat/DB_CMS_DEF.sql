@@ -23,7 +23,7 @@ USE `cms_bd`;
 CREATE TABLE IF NOT EXISTS `noticias` (
   `codin` bigint(20) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) NOT NULL,
-  `data` date NOT NULL,
+  `fecha` date NOT NULL,
   `descripcio` varchar(255) NOT NULL,
   PRIMARY KEY (`codin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Noticias publicadas a la web';
