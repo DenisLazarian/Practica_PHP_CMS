@@ -3,10 +3,15 @@
 defined('MVC_CMS') or die ('Permission denied');
 
 function inicio(){
+    include 'model/crudFunctions.php';
+    $news = selectListReportages();
     include 'views/main.php';
 }
 
 function privado(){
+
+    include 'model/crudFunctions.php';
+    $news = selectListReportages();
     include 'views/privSpace.php';
 }
 

@@ -234,7 +234,7 @@ function insertNewByAdminOrReporterAction(){
         // echo $_POST['new-date'];
     
         $stmt = $conexion -> prepare("INSERT INTO noticias ( titulo, fecha, descripcio) VALUES (?,?,?)"); // inserta registres a bases de dades
-        $stmt ->bind_param("sds",
+        $stmt ->bind_param("sss",
             $_POST['new-title'],
             $_POST['new-date'],
             $_POST['new-description']
@@ -246,10 +246,36 @@ function insertNewByAdminOrReporterAction(){
         $stmt -> close();
         $conexion ->close();
 
-        // header("location: index.php?action=news-list");
+        header("location: index.php?action=news-list");
     
         
     }
+}
+
+
+
+function selectListReportages(){
+
+    require "config/db.php";
+
+    $newsSelect = "SELECT * from noticias";
+
+    $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);  
+
+    if ($conexion->connect_error) {
+        die("Connection failed: " . $conexion->connect_error);
+    }
+
+    $stmt = $conexion -> query($newsSelect);
+
+    if ($stmt->num_rows > 0) {
+        // $res = $stmt->fetch_assoc();
+        $res = $stmt->fetch_all(MYSQLI_ASSOC);
+    } else {
+        $res = null;
+    }
+    $conexion->close();
+    return $res;
 }
 
 

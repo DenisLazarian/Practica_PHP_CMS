@@ -25,6 +25,7 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
 
 }elseif (isset($_GET['action']) && $_GET['action']=="priv-space") {
     
+    
     require "controller/ctl_main.php";
     privado();
     
@@ -72,7 +73,7 @@ elseif (isset($_GET['action']) && $_GET['action']=="new-delete") {
     session_start(); 
         if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false ){
             die("Permiso denegado!!! Debe iniciar session para acceder aqui.");
-        }elseif( $_SESSION["level-role"] !=10 || $_SESSION["level-role"] < 5  ){
+        }elseif( !($_SESSION["level-role"] ==10 || $_SESSION["level-role"] >= 5)  ){
             // echo  $_SESSION["level-role"];
             die("Permiso denegado!!! no dispone de permisos para esta accion.");
         }

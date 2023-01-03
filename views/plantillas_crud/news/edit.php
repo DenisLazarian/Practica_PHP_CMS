@@ -4,7 +4,7 @@
 defined("MVC_CMS") or die('Permission denied');
 session_start();
 
-if(!($_SESSION["level-role"] == 10 && $_SESSION["logueado"]==true) ){
+if(!(($_SESSION["level-role"] == 10 || $_SESSION["level-role"] >= 5) && $_SESSION["logueado"]==true) ){
     die("Permiso denegado!! no dispone de permiso para esta accion.");
 }
 
@@ -78,7 +78,7 @@ $reportage = selected_reportage();
         
 
             <input class="fw-semibold btn btn-info w-100 text-light mt-4" name="modificar" type="submit" value="Modify">
-            <a href="index.php?action=reportage-list" class="text-decoration-none">Return to the administration area.</a>
+            <a href="index.php?action=news-list" class="text-decoration-none">Return to the administration area.</a>
             
             
         </form>

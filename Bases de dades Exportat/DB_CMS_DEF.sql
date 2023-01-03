@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `titulo` varchar(255) NOT NULL,
   `fecha` date NOT NULL,
   `descripcio` varchar(255) NOT NULL,
+  `article` TEXT NOT NULL,
   PRIMARY KEY (`codin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Noticias publicadas a la web';
 

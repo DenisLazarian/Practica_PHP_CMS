@@ -3,7 +3,7 @@ session_start();
 
 // include "model/crudFunctions.php";
 // error_reporting(E_ERROR);
-if(!($_SESSION["level-role"] == 10 && $_SESSION["logueado"]==true) ){
+if(!($_SESSION["level-role"] == 10 ||$_SESSION["level-role"] >=5 && $_SESSION["logueado"]==true) ){
     die("Permiso denegado!! no dispone de permiso para esta accion.");
 }
 

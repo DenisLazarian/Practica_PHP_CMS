@@ -4,7 +4,7 @@ defined("MVC_CMS") or die('Permission denied');
 // defined("PRIV_PAGE") or die('Permission denied!! no pasa por list-area');
 session_start(); 
 
-if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION["logueado"]==true) ){
+if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SESSION["logueado"]) && $_SESSION["logueado"]==true) ){
     die("Permiso denegado!! no dispone de permiso para esta accion.");
 }
 
@@ -92,6 +92,17 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
     </tbody>
 
 </table>
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 
 
 </div>
