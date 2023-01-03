@@ -57,44 +57,58 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
                 die("Connection failed: " . $connUser->connect_error);
             }
 
+            // Al final aquest estament serveix per obtenir la quantitat de registres.
             $sql = "Select * from users";
             $registers = $connUser -> query($sql);
             
-            $paginas_x_article = 4;
-            // $$registers  -> close();
-            
-            
-            // $totalRegisters = $registers -> rowCount();
+            $users_x_pagina = 4;
             $cont =0;
+            if ($registers->num_rows > 0) {
+                while($row=$registers -> fetch_assoc()){
+                    $cont++;
+                }
+            }
+            $paginasTotales = ceil($cont/$users_x_pagina);
+            
+            
             $registers -> close();
+            // fi del estamebt $registres.
+            
+            if( !isset($_GET['pagina']) || $_GET['pagina']<1 ) // si el valor get supera els limits, ho fiquem sempre al 1.
+                $_GET['pagina'] = 1;
+            if($_GET['pagina']>$paginasTotales)
+                $_GET['pagina'] = $paginasTotales;
 
-            $sqlLimit = 'SELECT * from users limit 1,3';
+            $iniciar = ($_GET['pagina']-1) * $users_x_pagina; // ens dona la
+            $sqlLimit = 'SELECT * from users limit ?,?'; // establim el limitador en funcio del valor get que obtenim. si pagina = 1 el limit esta entre 0-3 que ens dona els primer 4 registres
 
             $sentencia = $connUser -> prepare($sqlLimit);
-            // $sentencia -> bind_param('i', )
-            $sentencia -> execute();
+            $sentencia -> bind_param('ii', $iniciar,  $users_x_pagina);
+            $ok = $sentencia -> execute();
 
-            if ($sentencia->num_rows > 0) {
-                while($row=$sentencia -> fetch_assoc()){
+            if ($ok) {
+                $sentencia -> bind_result($userName, $fullName, $passo, $email, $age, $level);
+                while($sentencia -> fetch()){
+                    // echo $userName;
             ?>
             
 
             <tr>
-                <td><?php echo $row['nick'] ?>
+                <td><?php echo $userName ?>
                 </td>
-                <td><?php echo $row['nomcognom'] ?>
+                <td><?php echo $fullName?>
                 </td>
-                <td><?php echo $row['mail'] ?>
+                <td><?php echo $email ?>
                 </td>
-                <td><?php echo $row['edat'] ?>
+                <td><?php echo $age ?>
                 </td>
-                <td><?php echo $row['nivell'] ?>
+                <td><?php echo $level ?>
                 </td>
-                <td><a href="index.php?action=user-edit&id=<?php echo $row['nick'] ?>" class="modify btn btn-warning">Modify</a>&#32;
+                <td><a href="index.php?action=user-edit&id=<?php echo $userName ?>" class="modify btn btn-warning">Modify</a>&#32;
 
-                <?php if($row['nick'] != $_SESSION["usuario"]){ ?>
+                <?php if($userName != $_SESSION["usuario"]){ ?>
                 
-                <a href="index.php?action=user-delete&id=<?php echo $row['nick'] ?>" class="modify btn btn-danger">Delete</a>
+                <a href="index.php?action=user-delete&id=<?php echo $userName ?>" class="modify btn btn-danger">Delete</a>
 
                 <?php 
 
@@ -104,11 +118,11 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
             </tr>
 
         <?php 
-                $cont++;
+                
                 }
             }
-            echo $cont++;
-            $paginasTotales = ceil($cont/$paginas_x_article);
+            
+            
         //    echo $paginasTotales;
         ?>
         
@@ -118,10 +132,7 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
     </table>
 
     <?php 
-    if( !isset($_GET['pagina']) || $_GET['pagina']<1 )
-    $_GET['pagina'] = 1;
-    if($_GET['pagina']>$paginasTotales)
-    $_GET['pagina'] = $paginasTotales;
+    
     ?>
 
     <nav aria-label="Page navigation example">
