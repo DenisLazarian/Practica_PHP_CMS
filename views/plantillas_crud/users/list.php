@@ -19,7 +19,14 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
 
+    @media (max-width: 670px){
+        .table-responsive{
+            overflow-x: scroll;
+        }
+    }
+</style>
 </head>
 <body>
 
@@ -34,7 +41,7 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
 
     <a class="btn btn-success" href="index.php?action=user-create"><div class="glyphicon glyphicon-plus-sign"></div>New user</a>
     <a href="index.php?action=priv-space" class="btn btn-primary"><div class="glyphicon glyphicon-plus-sign"></div>Home</a>
-    <table class="table mt-5 table-striped table-hover table-light">
+    <table class="table mt-5 table-striped table-hover table-light table-responsive">
         <thead>
             <tr>
                 <th>Nickname</th>
@@ -62,7 +69,7 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
             $registers = $connUser -> query($sql);
             
             $users_x_pagina = 4;
-            $cont =0;
+            $cont = 0;
             if ($registers->num_rows > 0) {
                 while($row=$registers -> fetch_assoc()){
                     $cont++;
@@ -131,9 +138,7 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
 
     </table>
 
-    <?php 
     
-    ?>
 
     <nav aria-label="Page navigation example">
     <ul class="pagination pagination-md justify-content-center">
@@ -152,7 +157,6 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
     </ul>
     </nav>
 
-    <?php  ?>
 
 
 </div>

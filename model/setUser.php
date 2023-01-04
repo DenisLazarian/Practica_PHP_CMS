@@ -31,15 +31,20 @@ require "../config/db.php";
     
         $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
     
-    
         $stmt = $conexion -> prepare("INSERT INTO users (nick, nomcognom, contraseña, mail, edat) VALUES (?,?,?,?,?)"); // inserta registres a bases de dades
         $stmt ->bind_param("ssssi", $user,$fullName, $contraseña, $mail, $edad);
         
-        $user = $username;
-        $contraseña = password_hash($confirmPass, PASSWORD_DEFAULT);
-        $fullName=$name. " ".$lastName;
-        $edad=$age;
-        $stmt -> execute();
+        if(empty($pass) || empty($confirmPass) || $pass != $confirmPass){
+            die("contraseñes buides o no correponen un amb l'altre entre la contraseña normal i la de confirmació. Per crear de nou apreta <a href='index.php?action=register'>aqui</a>.");
+        }else{
+            $user = $username;
+            $contraseña = password_hash($confirmPass, PASSWORD_DEFAULT);
+            $fullName=$name. " ".$lastName;
+            $edad=$age;
+            $stmt -> execute();
+        }
+        
+        
     
         
         

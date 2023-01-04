@@ -2,33 +2,54 @@
 
 // Funció que modifica les dades de l'usuari seleccionat per la funció "selected_user()".
 function update_user(){
-    include "../../../config/db.php";
+    include "config/db.php";
 
     $connect = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-    $stmt = $connect -> prepare("UPDATE users SET nomcognom = ?, contraseña = ?, mail = ?, edat = ?, nivell = ? where nick = ?"); // inserta registres a bases de dades
+    $passValue = "";
+    $paramNotations = "ssiis";
+    
+
+    if(!empty($_POST['password'])){
+        $passValue = ", contraseña = ?";
+        $paramNotations = "sssiis";
+        
+    }
+
+    $stmt = $connect -> prepare("UPDATE users SET nomcognom = ?".$passValue.", mail = ?, edat = ?, nivell = ? where nick = ?"); // inserta registres a bases de dades
+    
+    if(!empty($_POST['password'])){ // si no s'afegeix un nou password, no modificara l'antic.
     $stmt ->bind_param(
-        "sssiis", 
+        $paramNotations, 
         $_POST['new-full-name'], 
-        password_hash($_POST['password'], PASSWORD_DEFAULT), 
+        password_hash($_POST['password'], PASSWORD_DEFAULT),
         $_POST['new-mail'], 
         $_POST['new-age'], 
         $_POST['level-role'],
         $_GET['id']
     );
-    
+    }else{
+        $stmt ->bind_param(
+            $paramNotations, 
+            $_POST['new-full-name'], 
+            $_POST['new-mail'], 
+            $_POST['new-age'], 
+            $_POST['level-role'],
+            $_GET['id']
+        );
+    }
     
     $stmt -> execute();
 
     $stmt -> close();
     $connect ->close();
 
-    header("location: ../../../index.php?action=user-list");
+    header("location: index.php?action=user-list");
 
 }
 
 function update_reportage(){
-    include "../../../config/db.php";
+    include "config/db.php";
 
     $connect = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
@@ -47,7 +68,7 @@ function update_reportage(){
     $stmt -> close();
     $connect ->close();
 
-    header("location: ../../../index.php?action=news-list");
+    header("location: index.php?action=news-list");
 
 }
 
@@ -277,6 +298,9 @@ function selectListReportages(){
     $conexion->close();
     return $res;
 }
+
+
+
 
 
 

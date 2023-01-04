@@ -1,5 +1,5 @@
 <?php  
-
+error_reporting(E_ERROR); // per treure els warnings degut a la inexistencia de les variables de sessions quan no estas logat o es la primera vegada que s'entra a la pagina.
 define("MVC_CMS", "app");
 
 
@@ -32,7 +32,7 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
 
 }elseif (isset($_GET['action']) && $_GET['action']=="user-list") {
     // session_start();
-
+        
         require "controller/ctl_main.php";
         listarUsuarios();
     
@@ -79,6 +79,28 @@ elseif (isset($_GET['action']) && $_GET['action']=="new-delete") {
         }
         require "controller/ctl_delete.php";
         render_delete_reportage();
+}elseif (isset($_GET['action']) && $_GET['action']=="user-update"){
+    session_start(); 
+    
+    if(!($_SESSION["level-role"] == 10 && $_SESSION["logueado"]==true) ){
+        die("Permiso denegado!! no dispone de permiso para esta accion.");
+    }
+
+    include "model/crudFunctions.php";
+
+    update_user();
+}
+elseif (isset($_GET['action']) && $_GET['action']=="new-update"){
+    session_start();
+
+    if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] >=5 && $_SESSION["logueado"]==true) ){
+        die("Permiso denegado!! no dispone de permiso para esta accion.");
+    }
+    
+    
+    include "model/crudFunctions.php";
+    
+    update_reportage();
 }
 
 

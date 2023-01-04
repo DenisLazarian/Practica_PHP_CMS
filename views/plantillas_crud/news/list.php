@@ -55,27 +55,54 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
         if ($connUser->connect_error) {
             die("Connection failed: " . $connUser->connect_error);
         }
-
+        $users_x_pagina = 2;
+        $cont = 0;
         $sql = "SELECT * from noticias";
         $registers = $connUser -> query($sql);
-
+        
         if ($registers->num_rows > 0) {
             while($row=$registers -> fetch_assoc()){
+                $cont++;
+            }
+        }
+
+        $paginasTotales = ceil($cont/$users_x_pagina);
+            
+            
+        $registers -> close();
+        // fi del estamebt $registres.
+        
+        if( !isset($_GET['pagina']) || $_GET['pagina']<1 ) // si el valor get supera els limits, ho fiquem sempre al 1.
+            $_GET['pagina'] = 1;
+        if($_GET['pagina']>$paginasTotales)
+            $_GET['pagina'] = $paginasTotales;
+
+        $iniciar = ($_GET['pagina']-1) * $users_x_pagina; // ens dona la
+        $sqlLimit = 'SELECT * from noticias limit ?,?'; // establim el limitador en funcio del valor get que obtenim. si pagina = 1 el limit esta entre 0-3 que ens dona els primer 4 registres
+
+        $sentencia = $connUser -> prepare($sqlLimit);
+        $sentencia -> bind_param('ii', $iniciar,  $users_x_pagina);
+        $ok = $sentencia -> execute();
+
+        if ($ok) {
+            $sentencia -> bind_result($id, $title, $date, $description, $article);
+            while($sentencia -> fetch()){
+
         ?>
         
 
         <tr>
-            <td><?php echo $row['titulo'] ?>
+            <td><?php echo $title ?>
             </td>
-            <td><?php echo $row['fecha'] ?>
+            <td><?php echo $date ?>
             </td>
-            <td><?php echo $row['descripcio'] ?>
+            <td><?php echo $description ?>
             </td>
             
-            <td><a href="index.php?action=new-edit&id=<?php echo $row['codin'] ?>" class="modify btn btn-warning">Modify</a>&#32;
+            <td><a href="index.php?action=new-edit&id=<?php echo $id ?>" class="modify btn btn-warning">Modify</a>&#32;
 
             
-            <a href="index.php?action=new-delete&id=<?php echo $row['codin'] ?>" class="modify btn btn-danger">Delete</a>
+            <a href="index.php?action=new-delete&id=<?php echo $id?>" class="modify btn btn-danger">Delete</a>
 
             
                 
@@ -95,14 +122,21 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
 
 
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+    <ul class="pagination pagination-md justify-content-center">
+        <li class="page-item <?=$_GET['pagina']<=1 ? 'disabled': ''; ?>"><a class="page-link" href="index.php?action=news-list&pagina=<?=$_GET['pagina']-1; ?>" >Previous</a></li>
+
+        <?php 
+        for ($i=0; $i < $paginasTotales; $i++) { 
+        ?>
+        
+        <li class="page-item <?=$_GET['pagina']==$i+1 ? 'active': '';?> "><a class="page-link   " href="index.php?action=news-list&pagina=<?=$i+1; ?>"><?=$i+1; ?></a></li>
+
+    <?php } ?>
+    
+
+        <li class="page-item <?=$_GET['pagina']>=$paginasTotales ? 'disabled': ''; ?>"><a class="page-link " href="index.php?action=news-list&pagina=<?=$_GET['pagina']+1; ?>">Next</a></li>
+    </ul>
+    </nav>
 
 
 </div>

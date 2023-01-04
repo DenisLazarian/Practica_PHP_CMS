@@ -16,6 +16,7 @@ include "model/crudFunctions.php";
 $user = selected_user();
 // echo $user['contraseña'];
 
+// "views/plantillas_crud/users/update.php?id=<?=$_GET['id'];
 
 
 ?>
@@ -35,8 +36,7 @@ $user = selected_user();
 
 
 <div class=" d-flex justify-content-center align-items-center   p-md-5   ">
-        <form class="bg bg-white p-5  " style="width: 29rem;" action="views/plantillas_crud/users/update.php?id=<?=$_GET['id']; ?>" method="post" >
-        
+        <form class="bg bg-white p-5  " style="width: 29rem;" action="index.php?action=user-update&id=<?=$_GET['id']; ?>" method="post" >
             
             <div>
                

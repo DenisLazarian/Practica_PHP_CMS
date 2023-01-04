@@ -35,7 +35,7 @@ $reportage = selected_reportage();
 
 
 <div class=" d-flex justify-content-center align-items-center   p-md-5   ">
-        <form class="bg bg-white p-5  " style="width: 29rem;" action="views/plantillas_crud/news/update.php?id=<?=$_GET['id']; ?>" method="post" >
+        <form class="bg bg-white p-5  " style="width: 29rem;" action="index.php?action=new-update&id=<?=$_GET['id']; ?>" method="post" >
         
             
             <!-- <div>
