@@ -30,6 +30,8 @@ function render_descargar_ficheros(){
 }
 
 function render_create_zip(){
+
+
     include  "model/model_browser/downloadZIP.php";
 }
 

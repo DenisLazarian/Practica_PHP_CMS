@@ -99,7 +99,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
         </form>
 
 
-        <?php echo '<a href="index.php?action=browser&nav='.str_replace("Almacen", "", $root).'"><button>Volver al explorador</button></a>';  ?> 
+        <?php echo '<a href="index.php?action=browser&nav='.str_replace($_SESSION['usuario'], "", $root).'"><button>Volver al explorador</button></a>';  ?> 
         
 
        

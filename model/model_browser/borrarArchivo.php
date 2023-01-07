@@ -5,7 +5,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
 }
 
 if(isset($_GET["nav"])){
-    $root = "views/Explorador de archivos/".$_SESSION['usuario'].$_GET["nav"];
+    $root = "views/Explorador_de_archivos/".$_SESSION['usuario'].$_GET["nav"];
     echo $root;
 }
 

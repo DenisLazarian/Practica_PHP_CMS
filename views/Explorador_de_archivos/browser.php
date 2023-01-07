@@ -7,13 +7,13 @@
     }
 
 
-    // "views/Explorador de archivos/Almacen/    <- Referencia" 
+    // "views/Explorador_de_archivos/Almacen/    <- Referencia" 
 
 
-    $root = realpath("views/Explorador de archivos/".$_SESSION['usuario']."/");
+    $root = realpath("views/Explorador_de_archivos/".$_SESSION['usuario']."/");
 
-    if(!file_exists("views/Explorador de archivos/".$_SESSION['usuario']."/")){
-        mkdir("views/Explorador de archivos/".$_SESSION['usuario']."/");
+    if(!file_exists("views/Explorador_de_archivos/".$_SESSION['usuario']."/")){
+        mkdir("views/Explorador_de_archivos/".$_SESSION['usuario']."/");
     }
     // $zona_restringida = realpath("../../../htdocs");
     $dir_actual = $root;
@@ -70,7 +70,7 @@ include("views/plantillas/_privNavBar.php");
 ?>
 <div class="m-5 p-3 pt-0">
         
-    <h3>Explorador de archivos</h3>
+    <h3>Explorador_de_archivos</h3>
     
 <br>
         <h4>posicion actual: <?= $_SESSION['usuario'].$root_user; ?></h4>
@@ -90,7 +90,7 @@ include("views/plantillas/_privNavBar.php");
                     while (($file = readdir($dh)) !== false){
 
                         if($file != "."){
-                            $fullpath = ($dir_actual."/".$file);
+                            $fullpath = ($dir_actual."\\".$file);
                         ?>     
                             <tr>
                                 
@@ -100,20 +100,24 @@ include("views/plantillas/_privNavBar.php");
                                 
                             ?>
                                 
-                                <td><?php
+                                <td>
+                                    <?php
 
 
                                 if($file === ".."){
-                                echo '<img style="height:25px" src="views/Explorador de archivos/imagenes/atras.png"/>';
-
+                                    print  "<a href='index.php?action=browser&nav=".$root_user."\\".$file."'>";
+                                    echo '<img style="height:25px" src="views/Explorador_de_archivos/imagenes/arrow-left-solid.svg"/>';
+                                    print '</a></td>';
                                 }else{
-                                echo '<img style="height:25px" src="views/Explorador de archivos/imagenes/folder.png"/>';
+                                    echo '<img style="height:25px" src="views/Explorador_de_archivos/imagenes/folder.png"/>';
                                 }
                                 ?>
                                 
-                                <a href="index.php?action=browser&nav=<?=$root_user."\\".$file;?>"> <?=$file; ?> </a></td>
                                 
                                 <?php if($file !==".."){ ?>
+                                    <a href="index.php?action=browser&nav=<?=$root_user."\\".$file;?>"> <?=$file; ?> </a>
+                                
+                                </td>
                                 
                                 <td><?="Carpeta"; ?></td>
                                 <?php }else { echo "<td></td>";} ?>
@@ -125,8 +129,8 @@ include("views/plantillas/_privNavBar.php");
                                         $_SESSION['ruta']= $_SESSION['usuario'].$root_user; // Variable session per pasar la ruta com a parametre a formularis POST
 
 
-                                        echo "<a class='btn btn-success mx-4' href='index.php?action=create_directory'> <img style='height:25px' src='views/Explorador de archivos/imagenes/crear.svg'/></a>";
-                                        echo "<a class='btn btn-primary' href='index.php?action=create_file'><img style='height:25px' src='views/Explorador de archivos/imagenes/crear_file.png'/></a>";
+                                        echo "<a class='btn btn-success mx-4' href='index.php?action=create_directory'> <img style='height:25px' src='views/Explorador_de_archivos/imagenes/crear.svg'/></a>";
+                                        echo "<a class='btn btn-primary' href='index.php?action=create_file'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/crear_file.png'/></a>";
                                         
 
                                         // if(isset)
@@ -134,9 +138,9 @@ include("views/plantillas/_privNavBar.php");
                                     }else{
                                         $_SESSION['ruta']= $_SESSION['usuario'].$root_user; // Variable session per pasar la ruta com a parametre a formularis POST
 
-                                        print "<a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=carpeta'><img style='height:25px' src='views/Explorador de archivos/imagenes/fdelete.png'/></a>";
-                                        print "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=carpeta&fichero=".$file."'><img style='height:25px' src='views/Explorador de archivos/imagenes/editar.svg'/></a>";
-                                        print "<a class='btn btn-secondary mx-4' href='index.php?action=zip&nav=".$root_user."\\".$file."&root=".$root_user."&arch=carpeta&fichero=".$file."'><img style='height:25px' src='views/Explorador de archivos/imagenes/file-zipper-solid.svg'/></a>";
+                                        print "<a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=carpeta'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/fdelete.png'/></a>";
+                                        print "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=carpeta&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/editar.svg'/></a>";
+                                        print "<a class='btn btn-secondary mx-4' href='index.php?action=zip&nav=".$root_user."\\".$file."&root=".$root_user."&arch=carpeta&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/file-zipper-solid.svg'/></a>";
                                         
 
                                     }
@@ -157,15 +161,18 @@ include("views/plantillas/_privNavBar.php");
                                 // $_SESSION['ruta']= "Almacen".$root_user; // Variable session per pasar la ruta com a parametre a formularis POST
 
                                 if($extension =="png" || $extension =="jpg" )
-                                echo '<td><img style="height:25px" src="views/Explorador de archivos/imagenes/file-img.jpg"/><a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' ">'.$file.'</a></td>';
+                                echo '<td><img style="height:25px" src="views/Explorador_de_archivos/imagenes/file-img.jpg"/><a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' ">'.$file.'</a></td>';
                                 // elseif($extension['extension'] ===null)
-                                // echo '<td><img src="views/Explorador de archivos/imagenes/file-text.png"/><a href="download.php?nav='.$root_user.'\\'.$file.' "> '.$file.'</a></td>';
+                                // echo '<td><img src="views/Explorador_de_archivos/imagenes/file-text.png"/><a href="download.php?nav='.$root_user.'\\'.$file.' "> '.$file.'</a></td>';
+                                elseif($extension =="zip" || $extension =="rar")
+                                echo '<td><img style="height:25px" src="views/Explorador_de_archivos/imagenes/file-zipper-regular.svg"/>&#32;<a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' ">'.$file.'</a></td>';
+
                                 else
-                                echo '<td><img style="height:25px" src="views/Explorador de archivos/imagenes/file-text.png"/><a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' "> '.$file.'</a></td>';
+                                echo '<td><img style="height:25px" src="views/Explorador_de_archivos/imagenes/file-text.png"/><a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' "> '.$file.'</a></td>';
                                 // echo '<td><a href="download.php"> '.$file.'  </a></td>';
                                 print "<td>Archivo</td>\n";
-                                print "<td><a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero'><img style='height:25px' src='views/Explorador de archivos/imagenes/fdelete.png'/></a>".
-                                "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador de archivos/imagenes/editar.svg'/></a>"."<a class='btn btn-secondary mx-4' href='index.php?action=zip&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador de archivos/imagenes/file-zipper-solid.svg'/> </td>";
+                                print "<td><a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/fdelete.png'/></a>".
+                                "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/editar.svg'/></a>"."<a class='btn btn-secondary mx-4' href='index.php?action=zip&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/file-zipper-solid.svg'/> </td>";
 
                             }   
                             ?>
@@ -198,9 +205,7 @@ include("views/plantillas/_privNavBar.php");
 </div>
 
             
-    <!-- <?php 
-        phpinfo();
-    ?> -->
+    
     
     <!-- <?php 
 
@@ -232,12 +237,6 @@ include("views/plantillas/_privNavBar.php");
             // }
     ?> -->
     
-
-    <?php
-
-    
-  
-?>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 

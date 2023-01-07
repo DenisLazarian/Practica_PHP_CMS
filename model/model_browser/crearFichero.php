@@ -87,7 +87,7 @@ if(!file_exists($nuevofile)){
 
 
 
-    <?php echo '<a href="index.php?action=browser&nav='.str_replace("Almacen", "", $root).'"><button>Volver al explorador</button></a>';  ?> 
+    <?php echo '<a href="index.php?action=browser&nav='.str_replace($_SESSION['usuario'], "", $root).'"><button>Volver al explorador</button></a>';  ?> 
 
 
     
