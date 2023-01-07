@@ -40,10 +40,7 @@ if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false){
                 </li>
             </ul>
 
-            <div>
-                <a href="index.php?action=browser"><img style="height: 25px;" src="views/img/browser.png" alt="icono de explorador de archivos"></a>
-
-            </div>
+            
             <?php 
             if($_SESSION["logueado"] && $_SESSION['level-role']>=5){
             ?>

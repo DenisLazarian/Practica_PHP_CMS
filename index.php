@@ -1,5 +1,5 @@
 <?php  
-error_reporting(E_ERROR); // per treure els warnings degut a la inexistencia de les variables de sessions quan no estas logat o es la primera vegada que s'entra a la pagina.
+// error_reporting(E_ERROR); // per treure els warnings degut a la inexistencia de les variables de sessions quan no estas logat o es la primera vegada que s'entra a la pagina.
 define("MVC_CMS", "app");
 
 
@@ -108,6 +108,49 @@ elseif (isset($_GET['action']) && $_GET['action']=="new-update"){
 elseif (isset($_GET['action'])&& $_GET['action']=="close") {
     require "controller/ctl_log_out.php";
     destroy_session();
+}
+elseif (isset($_GET['action'])&& $_GET['action']=="browser"){
+    session_start();
+    if(!( $_SESSION["logueado"]==true) ){
+        die("Acceso denegado!! no dispone de una cuenta activa para acceder aqui. Para iniciar sessión pulse <a href='index.php?action=login'>Aqui</a>.");
+    }
+
+    include "views/Explorador de archivos/browser.php";
+
+
+}elseif(isset($_GET['action'])&& $_GET['action']=="create_directory"){
+    session_start();
+
+    include "controller/ctl_acciones_browser.php";
+    render_crear_carpeta();
+}elseif (isset($_GET['action'])&& $_GET['action']=="create_file"){
+    session_start();
+
+    include "controller/ctl_acciones_browser.php";
+    render_crear_fichero();
+}elseif (isset($_GET['action'])&& $_GET['action']=="delete_item"){
+    session_start();
+
+    include "controller/ctl_acciones_browser.php";
+    render_borrar_archivos();
+}
+elseif (isset($_GET['action'])&& $_GET['action']=="copy_item") {
+    session_start();
+
+    include "controller/ctl_acciones_browser.php";
+    render_copiar_arvhivo();
+}
+elseif (isset($_GET['action'])&& $_GET['action']=="download_file") {
+    session_start();
+
+    include "controller/ctl_acciones_browser.php";
+    render_descargar_ficheros();
+}
+elseif (isset($_GET['action'])&& $_GET['action']=="zip") {
+    session_start();
+
+    include "controller/ctl_acciones_browser.php";
+    render_create_zip();
 }
 
 else{
