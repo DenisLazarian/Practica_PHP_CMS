@@ -30,7 +30,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
 
 
     if(!file_exists($nuevoDir))
-        mkdir($nuevoDir);
+        mkdir($nuevoDir, 0777);
     else{
         if(isset($_POST["enviar"]))
             $existe=true;

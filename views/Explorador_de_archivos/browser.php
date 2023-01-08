@@ -164,16 +164,23 @@ include("views/plantillas/_privNavBar.php");
                                 echo '<td><img style="height:25px" src="views/Explorador_de_archivos/imagenes/file-img.jpg"/><a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' ">'.$file.'</a></td>';
                                 // elseif($extension['extension'] ===null)
                                 // echo '<td><img src="views/Explorador_de_archivos/imagenes/file-text.png"/><a href="download.php?nav='.$root_user.'\\'.$file.' "> '.$file.'</a></td>';
-                                elseif($extension =="zip" || $extension =="rar")
+                                elseif($extension =="zip")
                                 echo '<td><img style="height:25px" src="views/Explorador_de_archivos/imagenes/file-zipper-regular.svg"/>&#32;<a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' ">'.$file.'</a></td>';
 
                                 else
                                 echo '<td><img style="height:25px" src="views/Explorador_de_archivos/imagenes/file-text.png"/><a href="index.php?action=download_file&nav='.$root_user.'\\'.$file.' "> '.$file.'</a></td>';
                                 // echo '<td><a href="download.php"> '.$file.'  </a></td>';
                                 print "<td>Archivo</td>\n";
-                                print "<td><a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/fdelete.png'/></a>".
-                                "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/editar.svg'/></a>"."<a class='btn btn-secondary mx-4' href='index.php?action=zip&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/file-zipper-solid.svg'/> </td>";
-
+                                if($extension !="zip"){
+                                    print "<td><a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/fdelete.png'/></a>".
+                                    "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/editar.svg'/></a>"."<a class='btn btn-secondary mx-4' href='index.php?action=zip&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/file-zipper-solid.svg'/> </td>";
+    
+                                }else{
+                                    print "<td><a class='btn btn-danger mx-4' href='index.php?action=delete_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/fdelete.png'/></a>".
+                                    "<a class='btn btn-warning' href='index.php?action=copy_item&nav=".$root_user."\\".$file."&root=".$root_user."&arch=fichero&fichero=".$file."'><img style='height:25px' src='views/Explorador_de_archivos/imagenes/editar.svg'/></a> </td>";
+    
+                                }
+                                
                             }   
                             ?>
                             
@@ -202,40 +209,17 @@ include("views/plantillas/_privNavBar.php");
         ?>
     </table>
 
+    <div></div>
+
+    <div class="alert alert-info" role="alert">
+        Para descargar ficheros o archivos links situados a la carpeta uploads, debe pulsar los links. </br>
+        Para acceder al contenido de una carpeta debe pulsar el link.
+    </div>
 </div>
 
-            
     
     
-    <!-- <?php 
-
-            // $base_folder = realpath("dades/");
-            // $dir=$base_folder;
-
-            // if(isset($_GET["folder"])){
-            //     $dir = realpath($dir ."/". $_GET["folder"]. "/");
-
-            //     if(stripos($dir, $base_folder)===FALSE)
-            //         $dir = $base_folder;
-            // }
-
-        // forma facil de listar archivo
-            // $a = scandir($dir)
-
-            // $root_user = str_replace($base_folder, "", $dir);
-
-
-            // foreach ($a as $file){
-            //     $fullpath = $dir. "/". $file;
-            //     if($file == "."){
-            //         echo "titulo";
-            //     }elseif(is_dir($fullpath)){
-            //         <a href='index.php?folder= $root_user. \\. $file .'>
-            //     }else{
-
-            //     }
-            // }
-    ?> -->
+    
     
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>

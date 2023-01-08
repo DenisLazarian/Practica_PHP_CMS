@@ -27,7 +27,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
     
     //El destino donde se guardara la copia
     if(!file_exists($destination)){
-        mkdir($destination);
+        mkdir($destination, 0777);
     }
 
     
