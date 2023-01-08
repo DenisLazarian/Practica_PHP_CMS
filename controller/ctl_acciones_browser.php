@@ -6,7 +6,7 @@ defined('MVC_CMS') or die ('Permission denied');
 
 function render_browser_inicio(){
 
-    include "views/Explorador de archivos/browser.php";
+    include "views/Explorador_de_archivos/browser.php";
 
 }
 

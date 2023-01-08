@@ -6,7 +6,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
 
     // El archivo que se quiera guardar
     if(isset($_GET["nav"]))
-        $source ="views/Explorador de archivos/".$_SESSION['usuario'].$_GET['nav'];
+        $source ="views/Explorador_de_archivos/".$_SESSION['usuario'].$_GET['nav'];
 
 
     if(isset($_GET["arch"]))
@@ -23,11 +23,11 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
         
 
     
-    $destination = "views/Explorador de archivos/".$_SESSION['usuario']."/directory_copias";  // se trata de un destino fijo
+    $destination = "views/Explorador_de_archivos/".$_SESSION['usuario']."/directory_copias";  // se trata de un destino fijo
     
     //El destino donde se guardara la copia
     if(!file_exists($destination)){
-        mkdir($destination, 777);
+        mkdir($destination);
     }
 
     

@@ -9,7 +9,7 @@ if(!isset($_GET['nav']) || $_GET['nav']=="") die("No hay archivos seleccionados 
 // echo $_GET['nav'];
 // echo '<br>';
 
-$file_name= "views\Explorador de archivos\\".$_SESSION['usuario'];
+$file_name= "views\Explorador_de_archivos\\".$_SESSION['usuario'];
 
 // echo $file_name;
 // $zip = new ZipArchive();
@@ -25,23 +25,24 @@ $file_name= "views\Explorador de archivos\\".$_SESSION['usuario'];
 //     echo "fail";
 // }
 
-$zip = new \ZipArchive();
+$zip = new ZipArchive();
 
 //abrimos el archivo y lo preparamos para agregarle archivos
-$ok = $zip->open($file_name."/".$_GET['fichero'].".zip", \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+$ok = $zip->open($file_name."/".$_GET['nav'].".zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
 echo $ok;
+echo '<br>';
 
 //indicamos cual es la carpeta que se quiere comprimir
-$origen = $file_name.$_GET['nav'];
+$origen = realpath($file_name.$_GET['nav']);
 echo $file_name.$_GET['nav'];
 echo '<br>';
 echo "origen: ". $origen;
 echo '<br>';
 //Ahora usando funciones de recursividad vamos a explorar todo el directorio y a enlistar todos los archivos contenidos en la carpeta
-$files = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($origen),
-            \RecursiveIteratorIterator::LEAVES_ONLY
+$files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($origen),
+            RecursiveIteratorIterator::LEAVES_ONLY
 );
 
 //Ahora recorremos el arreglo con los nombres los archivos y carpetas y se adjuntan en el zip
@@ -60,7 +61,24 @@ foreach ($files as $name => $file)
 //Se cierra el Zip
 $zip->close();
 
+// $hidden_files = array();
+// $files = scandir($file_name."/".$_GET['nav']);
+// foreach ($files as $file) {
+//   if (substr($file, 0, 1) == '.') {
+//     // El archivo es oculto
+//     $hidden_files[] = $file;
+//   }
+// }
 
+// if (count($hidden_files) > 0) {
+// //   echo count($hidden_files);
+// var_dump($hidden_files);
+
+// } else {
+//   echo "No hay archivos ocultos";
+
+  
+// }
 
 
 

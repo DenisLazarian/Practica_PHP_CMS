@@ -19,7 +19,7 @@ if(isset($_POST["nuevoFichero"])){
     $nombre_carpeta = $_POST["nuevoFichero"];
 }  
 
-$nuevofile=  "views/Explorador de archivos/".$root."\\".$nombre_carpeta;
+$nuevofile=  "views/Explorador_de_archivos/".$root."\\".$nombre_carpeta;
 
 
 

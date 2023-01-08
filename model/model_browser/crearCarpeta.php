@@ -24,7 +24,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
         $nombre_carpeta = $_POST["nuevoDir"];
     }  
     
-    $nuevoDir= "views/Explorador de archivos/".$root."\\".$nombre_carpeta;
+    $nuevoDir= "views/Explorador_de_archivos/".$root."\\".$nombre_carpeta;
 
     // echo $nuevoDir;
 

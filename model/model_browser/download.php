@@ -6,7 +6,7 @@ if(!isset($_SESSION['logueado']) && !$_SESSION['logueado'] ){
 // if(!$strSession) header("location: index.php");
 
 //  $file_name="arxiu.txt";
- $file_name= "views/Explorador de archivos/".$_SESSION['usuario'].$_GET['nav'];
+ $file_name= "views/Explorador_de_archivos/".$_SESSION['usuario'].$_GET['nav'];
 
     //  echo $file_name;   
 //  pdf: $mime = 'application/pdf'

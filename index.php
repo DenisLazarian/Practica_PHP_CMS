@@ -115,7 +115,7 @@ elseif (isset($_GET['action'])&& $_GET['action']=="browser"){
         die("Acceso denegado!! no dispone de una cuenta activa para acceder aqui. Para iniciar sessión pulse <a href='index.php?action=login'>Aqui</a>.");
     }
 
-    include "views/Explorador de archivos/browser.php";
+    include "views/Explorador_de_archivos/browser.php";
 
 
 }elseif(isset($_GET['action'])&& $_GET['action']=="create_directory"){
