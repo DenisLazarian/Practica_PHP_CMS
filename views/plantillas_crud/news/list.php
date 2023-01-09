@@ -55,7 +55,7 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
         if ($connUser->connect_error) {
             die("Connection failed: " . $connUser->connect_error);
         }
-        $users_x_pagina = 2;
+        $users_x_pagina = 10;
         $cont = 0;
         $sql = "SELECT * from noticias";
         $registers = $connUser -> query($sql);
@@ -102,9 +102,9 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
             <td><a href="index.php?action=new-edit&id=<?php echo $id ?>" class="modify btn btn-warning">Modify</a>&#32;
 
             
-            <a href="index.php?action=new-delete&id=<?php echo $id?>" class="modify btn btn-danger">Delete</a>
+            <a href="index.php?action=new-delete&id=<?php echo $id?>" class="delete btn btn-danger">Delete</a>
 
-            
+            <a href="index.php?action=donwnload-toPDF&id=<?php echo $id?>" class="delete btn btn-secondary">Donwload PDF</a>
                 
             </td>
         </tr>

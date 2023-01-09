@@ -49,7 +49,7 @@ session_start();
                            
                         </p>
 
-                        <a href="#" class="btn btn-warning mb-2">Read more</a>
+                        <a href="index.php?action=show-new&id=<?=$row['codin'];?>" class="btn btn-warning mb-2">Read more</a>
 
                     </div>
 

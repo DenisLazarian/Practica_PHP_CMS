@@ -152,6 +152,23 @@ elseif (isset($_GET['action'])&& $_GET['action']=="zip") {
     include "controller/ctl_acciones_browser.php";
     render_create_zip();
 }
+elseif(isset($_GET['action'])&& $_GET['action']=="show-new"){
+    session_start();
+
+    include "controller/ctl_main.php";
+    render_new_selected($_GET['id']);
+
+    
+}
+elseif(isset($_GET['action'])&& $_GET['action']=="donwnload-toPDF"){
+    include_once "lib/TCPDF-main/tcpdf.php";
+    // session_start();
+
+    include "controller/ctl_pdf.php";
+    download_pdf($_GET['id']);
+
+    
+}
 
 else{
 

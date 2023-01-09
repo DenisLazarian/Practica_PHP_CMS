@@ -68,7 +68,7 @@ if(!($_SESSION["level-role"] == 10 && isset($_SESSION["logueado"]) && $_SESSION[
             $sql = "Select * from users";
             $registers = $connUser -> query($sql);
             
-            $users_x_pagina = 4;
+            $users_x_pagina = 10;
             $cont = 0;
             if ($registers->num_rows > 0) {
                 while($row=$registers -> fetch_assoc()){

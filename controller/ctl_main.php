@@ -22,4 +22,14 @@ function listarUsuarios(){
 function listarNoticias(){
     include 'views/plantillas_crud/news/list.php';
 }
+
+function render_new_selected($idGET){
+    include "model/crudFunctions.php";
+
+    $register = selectSingleReportage($idGET);
+
+    include 'views/plantillas/mainNew.php';
+}
+
+
 ?>

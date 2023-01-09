@@ -22,15 +22,11 @@ $zip = new ZipArchive();
 //abrimos el archivo y lo preparamos para agregarle archivos
 $ok = $zip->open($file_name."\uploads\\".$_GET['fichero'].".zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-echo $ok;
-echo '<br>';
+
 
 //indicamos cual es la carpeta que se quiere comprimir
 $origen = realpath($file_name.$_GET['nav']);
-echo $file_name.$_GET['nav'];
-echo '<br>';
-echo "origen: ". $origen;
-echo '<br>';
+
 //Ahora usando funciones de recursividad vamos a explorar todo el directorio y a enlistar todos los archivos contenidos en la carpeta
 if(is_dir($origen)){
 
@@ -45,7 +41,7 @@ foreach ($files as $name => $file)
     
     if (!$file->isDir())
     {
-        // echo "fichero";
+        
         $filePath = $file->getRealPath();
         $relativePath = substr($filePath, strlen($origen) + 1);
         $zip->addFile($filePath, $relativePath);
@@ -63,11 +59,6 @@ foreach ($files as $name => $file)
     $zip->addFile($origen, basename($origen));
 }
 //Se cierra el Zip
-
-
-
-// echo $zip->status;
-
 $zip -> close();
 
 header("location: index.php?action=browser&nav=\\uploads");  // despres de decarregar el zip, arribar al lloc de forma automatica per descarregar el zip.

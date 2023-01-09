@@ -301,6 +301,45 @@ function selectListReportages(){
 
 
 
+function selectSingleReportage($idGET){
+
+    require "config/db.php";
+
+
+    $conexion = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); 
+        
+    // echo $_POST['new-date'];
+
+    $stmt = $conexion -> prepare("select * from noticias where codin= ?"); // inserta registres a bases de dades
+    $stmt ->bind_param("i",
+        $idGET
+    );
+    
+    $ok = $stmt -> execute();
+    
+    
+    $stmt -> bind_result($id, $title, $date, $description, $article);
+    $stmt -> fetch();
+    
+    // echo $id. $title. $date. $description. $article;
+    
+    $arrayNewsSpecifications = array(   // ho assigno a un array associatiu per exportar els registres de DB.
+        "codin"         => $id, 
+        "titulo"        => $title, 
+        "fecha"         => $date, 
+        "descripcio"    => $description, 
+        "article"       => $article, 
+    );
+
+
+    $stmt -> close();
+    $conexion ->close();
+
+
+    // echo $arrayNewsSpecifications["titulo"];
+    return $arrayNewsSpecifications;
+}
+
 
 
 
