@@ -5,6 +5,10 @@ function download_pdf($idGET){
 
     // $register = selectSingleReportage($idGET);
     include "lib/TCPDF-main/plantillaNews.php";
+
+    
+
+
 }
 
 ?>

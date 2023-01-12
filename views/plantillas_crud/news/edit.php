@@ -46,7 +46,7 @@ $reportage = selected_reportage();
             
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de usuario">
+                    <img class="" style="height: 20px;" src="views/img/heading-solid.svg" alt="icono de usuario">
                 </div>
                 <input  class="form-control" type="text" name="new-title" id="name-reportage" value="<?=$reportage['titulo']; ?>">
 
@@ -60,19 +60,24 @@ $reportage = selected_reportage();
             
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/check-to-slot-solid.svg" alt="icono de edad ">
+                    <img class="" style="height: 20px;" src="views/img/calendar-days-solid.svg" alt="icono de edad ">
                 </div>
                 <input class="form-control" type="date" name="new-date" id="date" value="<?=$reportage['fecha']; ?>">
 
             </div>
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/envelope-solid.svg" alt="icono de correo ">
+                    <img class="" style="height: 20px;" src="views/img/heading-solid.svg" alt="icono de descripcion ">
                 </div>
                 <input class="form-control" type="text" name="new-description" id="description" value="<?=$reportage['descripcio']; ?>">
 
             </div>
-           
+            <div class="d-flex input-group mt-3">
+               
+                <textarea class="form-control" type="text" name="new-article" id="article" placeholder="Article"><?=$reportage['article']; ?></textarea>
+
+            </div>
+            
         
             
         

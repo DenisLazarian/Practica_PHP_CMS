@@ -34,14 +34,14 @@ if(!($_SESSION["level-role"] == 10 ||$_SESSION["level-role"] >=5 && $_SESSION["l
             
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de titulo">
+                    <img class="" style="height: 20px;" src="views/img/heading-solid.svg" alt="icono de titulo">
                 </div>
                 <input  class="form-control" type="text" name="new-title" id="title" placeholder="Title">
 
             </div>
             <div class="d-flex input-group mt-3">
                 <div class="input-group-text bg-info">
-                    <img class="" style="height: 20px;" src="views/img/user-solid.svg" alt="icono de fecha">
+                    <img class="" style="height: 20px;" src="views/img/calendar-days-solid.svg" alt="icono de fecha">
                 </div>
                 <input  class="form-control" type="date" name="new-date" id="date" placeholder="Date">
 
@@ -53,6 +53,10 @@ if(!($_SESSION["level-role"] == 10 ||$_SESSION["level-role"] >=5 && $_SESSION["l
                     <img class="" style="height: 20px;" src="views/img/check-to-slot-solid.svg" alt="icono de descripción ">
                 </div>
                 <input class="form-control" type="text" name="new-description" id="description" placeholder="Description">
+            </div>
+            <div class="d-flex input-group mt-3">
+                
+                <textarea class="form-control" type="text" name="new-article" id="article" placeholder="Article"></textarea>
             </div>
             
         

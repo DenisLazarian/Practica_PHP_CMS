@@ -46,7 +46,7 @@ if(isset($_GET['action']) && $_GET['action']=="login"){
         session_start(); 
         if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false ){
             die("Permiso denegado!!! Debe iniciar session para acceder aqui.");
-        }elseif( $_SESSION["level-role"] ==10){
+        }elseif( $_SESSION["level-role"] < 10){
             die("Permiso denegado!!! no dispone de permisos para esta accion.");
         }
         require "controller/ctl_delete.php";
@@ -73,7 +73,7 @@ elseif (isset($_GET['action']) && $_GET['action']=="new-delete") {
     session_start(); 
         if(!isset($_SESSION["logueado"]) || $_SESSION["logueado"]==false ){
             die("Permiso denegado!!! Debe iniciar session para acceder aqui.");
-        }elseif( !($_SESSION["level-role"] ==10 || $_SESSION["level-role"] >= 5)  ){
+        }elseif( !($_SESSION["level-role"] <=10 && $_SESSION["level-role"] >= 5)  ){
             // echo  $_SESSION["level-role"];
             die("Permiso denegado!!! no dispone de permisos para esta accion.");
         }
@@ -93,7 +93,7 @@ elseif (isset($_GET['action']) && $_GET['action']=="new-delete") {
 elseif (isset($_GET['action']) && $_GET['action']=="new-update"){
     session_start();
 
-    if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] >=5 && $_SESSION["logueado"]==true) ){
+    if(!($_SESSION["level-role"] <= 10 && $_SESSION["level-role"] >=5 && $_SESSION["logueado"]==true) ){
         die("Permiso denegado!! no dispone de permiso para esta accion.");
     }
     

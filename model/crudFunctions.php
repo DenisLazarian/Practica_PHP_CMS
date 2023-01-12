@@ -53,13 +53,17 @@ function update_reportage(){
 
     $connect = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-    $stmt = $connect -> prepare("UPDATE noticias SET titulo = ?, fecha = ?, descripcio = ?  where codin =?"); // inserta registres a bases de dades
+    
+
+    $stmt = $connect -> prepare("UPDATE noticias SET titulo = ?, fecha = ?, descripcio = ?, article=? where codin =?"); // inserta registres a bases de dades
     $stmt ->bind_param(
-        "sssi", 
+        "ssssi", 
         $_POST['new-title'], 
         $_POST['new-date'], 
         $_POST['new-description'], 
-        $_GET['id']
+        $_POST['new-article'],
+        $_GET['id'],
+
     );
     
     
@@ -114,7 +118,7 @@ function selected_user(){
 }
 function selected_reportage(){
     include "config/db.php";
-    if(!isset($_SESSION['logueado'])&& $_SESSION['level-role']<10){
+    if(!isset($_SESSION['logueado']) && $_SESSION['level-role']<10){
         die("Acceso denegado, no dispone de permisos para acceder aqui");
     }
 
@@ -156,9 +160,9 @@ function deleteUser(){
     session_start();
     include "config/db.php";
 
-    if(!isset($_SESSION['logueado'])&& $_SESSION['level-role']<10){
-        die("Acceso denegado, no dispone de permisos para acceder aqui");
-    }
+    // if(!isset($_SESSION['logueado']) || $_SESSION['level-role']!=10){
+    //     die("Acceso denegado, no dispone de permisos para acceder aqui");
+    // }
 
 
 
@@ -254,11 +258,13 @@ function insertNewByAdminOrReporterAction(){
         
         // echo $_POST['new-date'];
     
-        $stmt = $conexion -> prepare("INSERT INTO noticias ( titulo, fecha, descripcio) VALUES (?,?,?)"); // inserta registres a bases de dades
-        $stmt ->bind_param("sss",
+        $stmt = $conexion -> prepare("INSERT INTO noticias ( titulo, fecha, descripcio, article, Autor) VALUES (?,?,?,?,?)"); // inserta registres a bases de dades
+        $stmt ->bind_param("sssss",
             $_POST['new-title'],
             $_POST['new-date'],
-            $_POST['new-description']
+            $_POST['new-description'],
+            $_POST['new-article'],
+            $_SESSION['nombre-completo']
         );
         
         
@@ -318,7 +324,7 @@ function selectSingleReportage($idGET){
     $ok = $stmt -> execute();
     
     
-    $stmt -> bind_result($id, $title, $date, $description, $article);
+    $stmt -> bind_result($id, $title, $date, $description, $article, $author);
     $stmt -> fetch();
     
     // echo $id. $title. $date. $description. $article;
@@ -329,6 +335,7 @@ function selectSingleReportage($idGET){
         "fecha"         => $date, 
         "descripcio"    => $description, 
         "article"       => $article, 
+        "autor"         => $author,
     );
 
 

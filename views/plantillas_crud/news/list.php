@@ -4,7 +4,7 @@ defined("MVC_CMS") or die('Permission denied');
 // defined("PRIV_PAGE") or die('Permission denied!! no pasa por list-area');
 session_start(); 
 
-if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SESSION["logueado"]) && $_SESSION["logueado"]==true) ){
+if(!($_SESSION["level-role"] <= 10 && $_SESSION["level-role"] >= 5 && isset($_SESSION["logueado"]) && $_SESSION["logueado"]==true) ){
     die("Permiso denegado!! no dispone de permiso para esta accion.");
 }
 
@@ -38,6 +38,7 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
     <thead>
         <tr>
             <th>Title</th>
+            <th>Author</th>
             <th>Publish date</th>
             <th>Desription</th>
             
@@ -85,7 +86,7 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
         $ok = $sentencia -> execute();
 
         if ($ok) {
-            $sentencia -> bind_result($id, $title, $date, $description, $article);
+            $sentencia -> bind_result($id, $title, $date, $description, $article, $autor);
             while($sentencia -> fetch()){
 
         ?>
@@ -93,6 +94,8 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
 
         <tr>
             <td><?php echo $title ?>
+            </td>
+            <td><?php echo $autor ?>
             </td>
             <td><?php echo $date ?>
             </td>
@@ -161,3 +164,4 @@ if(!($_SESSION["level-role"] == 10 || $_SESSION["level-role"] == 5 && isset($_SE
 
 </body>
 </html>
+
